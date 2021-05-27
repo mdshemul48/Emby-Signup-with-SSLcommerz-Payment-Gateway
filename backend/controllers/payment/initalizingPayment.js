@@ -28,10 +28,7 @@ const initalizingPayment = (req, res) => {
     cus_postcode: "NO",
     shipping_method: "NO",
     cus_phone: number,
-    value_a: username,
-    value_b: password,
-    value_c: "ref003_C",
-    value_d: "ref004_D",
+    value_a: JSON.stringify({ username, email, name, password, number }),
   };
 
   // initalizing SSLCommerz payment geteway
