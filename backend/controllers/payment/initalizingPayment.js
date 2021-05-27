@@ -14,7 +14,7 @@ const initalizingPayment = (req, res) => {
     total_amount: process.env.PRODUCT_PRICE,
     currency: "BDT",
     tran_id: "REF123",
-    success_url: process.env.ROOT_API_LINK + "/success",
+    success_url: process.env.ROOT_API_LINK + "/api/payment/success",
     fail_url: process.env.ROOT_API_LINK + "/fail",
     cancel_url: process.env.ROOT_API_LINK + "/cancel",
     ipn_url: process.env.ROOT_API_LINK + "/ipn",
@@ -58,4 +58,4 @@ const initalizingPayment = (req, res) => {
   });
 };
 
-exports.initalizingPayment = initalizingPayment;
+module.exports = initalizingPayment;
