@@ -1,6 +1,5 @@
 // this will handle all the payment related routes
 // and bring them to the controller..
-
 const router = require("express").Router();
 
 // when routes matched to this routes this controller function will run. then this will handle the rest.
