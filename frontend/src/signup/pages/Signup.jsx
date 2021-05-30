@@ -84,42 +84,45 @@ const Signup = () => {
   };
 
   return (
-    <div className="user">
-      <header className="user__header">
-        <img
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg"
-          alt=""
-        />
-        <h1 className="user__title">A signup page for circle emby server.</h1>
-      </header>
-
-      <form className="form" onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className="form__group">
+    <div className="container">
+      <form
+        className="form"
+        id="contact"
+        onSubmit={handleSubmit(onSubmitHandler)}
+      >
+        <h3>Emby Signup page</h3>
+        <h4>Contact us for custom quote</h4>
+        {uniqueUsername && (
+          <h4 className="error">
+            Username already exist. Please choose another one.
+          </h4>
+        )}
+        <fieldset>
           <input
             type="text"
             placeholder="Full Name"
             className="form__input"
             {...register("name")}
           />
-        </div>
+        </fieldset>
 
-        <div className="form__group">
+        <fieldset>
           <input
-            type="text"
             {...register("number")}
+            type="tel"
             placeholder="Phone Number"
             className="form__input"
           />
-        </div>
-        <div className="form__group">
+        </fieldset>
+        <fieldset>
           <input
             type="email"
             {...register("email")}
             placeholder="Email"
             className="form__input"
           />
-        </div>
-        <div className="form__group">
+        </fieldset>
+        <fieldset>
           <input
             type="text"
             {...register("username")}
@@ -127,19 +130,21 @@ const Signup = () => {
             className="form__input"
             onBlur={checkUsernameHandler}
           />
-        </div>
-        <div className="form__group">
+        </fieldset>
+        <fieldset>
           <input
             type="password"
             {...register("password", { min: 8 })}
             placeholder="Password"
             className="form__input"
           />
-        </div>
+        </fieldset>
 
-        <button className="btn" type="submit" disabled>
-          Pay and Register
-        </button>
+        <fieldset>
+          <button className="btn" type="submit">
+            Pay and Register
+          </button>
+        </fieldset>
       </form>
     </div>
   );
