@@ -5,7 +5,6 @@ const initalizingPayment = async (req, res) => {
   // this will create a payment and send that link (GatewayPageURL) to frontend.
   // then frontend will process that user for payment
   //
-
   // getting all the data of user.
   const { username, email, name, password, number } = req.body;
 
