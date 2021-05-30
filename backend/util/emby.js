@@ -54,8 +54,29 @@ class Emby {
     if (!setPassword.ok) {
       throw "can't added user password.";
     }
+    this.hideUser(userId);
 
     return { username, password, userId };
+  }
+  async hideUser(userId) {
+    const hideUser = await fetch(
+      `${this.url}/emby/Users/${userId}/Policy?api_key=${this.apiKey}`,
+      {
+        body: JSON.stringify({
+          IsHidden: true,
+          IsHiddenRemotely: true,
+        }),
+        method: "POST",
+        headers: {
+          accept: "*/*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!hideUser.ok) {
+      throw hideUser;
+    }
   }
 }
 
