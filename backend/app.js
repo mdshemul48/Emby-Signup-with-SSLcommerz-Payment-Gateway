@@ -12,6 +12,8 @@ app.use(bodyParser.json());
 // redirecting routes to the payment routes
 app.use("/api/payment", require("./routes/payment-route"));
 
+app.use("/api/user", require("./routes/user-route"));
+
 // run the server after db connected.
 mongoose.connect(
   process.env.DATABASE_URL,
