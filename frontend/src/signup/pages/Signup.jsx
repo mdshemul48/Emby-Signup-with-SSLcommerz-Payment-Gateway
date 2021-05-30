@@ -6,6 +6,8 @@ const Signup = () => {
   // changing title of the page.
   document.title = "Signup page";
 
+  const [uniqueUsername, setUniqueUsername] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -49,7 +51,37 @@ const Signup = () => {
     createPaymentSession();
   };
 
-  console.log(watch("username"));
+  // this will check if user already exist in the server or not.
+  const userExistHandler = async (username) => {
+    const response = await fetch(
+      process.env.REACT_APP_BACKEND_URL + `/api/user/username`,
+      {
+        body: JSON.stringify({
+          username,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      }
+    );
+
+    if (!response.ok) {
+      return alert("something wrong wth the username check function");
+    }
+
+    const responseText = await response.json();
+    if (!responseText.successful) {
+      return alert("something wrong wth the username check function");
+    }
+    setUniqueUsername(responseText.found);
+  };
+
+  // getting username and calling userExistHandler
+  const checkUsernameHandler = () => {
+    const username = watch("username");
+    userExistHandler(username);
+  };
 
   return (
     <div className="user">
@@ -93,6 +125,7 @@ const Signup = () => {
             {...register("username")}
             placeholder="Username"
             className="form__input"
+            onBlur={checkUsernameHandler}
           />
         </div>
         <div className="form__group">
@@ -104,7 +137,7 @@ const Signup = () => {
           />
         </div>
 
-        <button className="btn" type="submit">
+        <button className="btn" type="submit" disabled>
           Pay and Register
         </button>
       </form>
