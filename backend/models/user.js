@@ -20,6 +20,10 @@ const userSchema = mongoose.Schema({
     required: true,
     type: String,
   },
+  embyId: {
+    required: true,
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
