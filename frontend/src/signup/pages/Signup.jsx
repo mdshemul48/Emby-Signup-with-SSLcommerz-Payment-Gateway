@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 // signup page
 import "./Signup.css";
@@ -14,8 +14,39 @@ const Signup = () => {
   } = useForm();
 
   // this will handle after click submit the form.
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmitHandler = (data) => {
+    const { username, email, password, name, number } = data;
+
+    const createPaymentSession = async () => {
+      const response = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "/api/payment",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+            name,
+            number,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        console.log(response);
+        return alert("something wrong with the server please try again.");
+      }
+      const responseText = await response.json();
+      if (!responseText.successful) {
+        return alert("something wrong with the server please try again.");
+      }
+
+      return window.open(responseText.link, "_self");
+    };
+    createPaymentSession();
   };
 
   console.log(watch("username"));
@@ -30,7 +61,7 @@ const Signup = () => {
         <h1 className="user__title">A signup page for circle emby server.</h1>
       </header>
 
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="form" onSubmit={handleSubmit(onSubmitHandler)}>
         <div className="form__group">
           <input
             type="text"
@@ -67,7 +98,7 @@ const Signup = () => {
         <div className="form__group">
           <input
             type="password"
-            {...register("password")}
+            {...register("password", { min: 8 })}
             placeholder="Password"
             className="form__input"
           />
@@ -80,4 +111,5 @@ const Signup = () => {
     </div>
   );
 };
+
 export default Signup;
