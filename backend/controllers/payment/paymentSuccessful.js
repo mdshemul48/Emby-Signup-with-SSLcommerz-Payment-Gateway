@@ -1,4 +1,3 @@
-const SSLCommerzPayment = require("sslcommerz");
 const Emby = require("../../util/emby");
 
 const paymentSuccessful = async (req, res) => {
@@ -18,15 +17,18 @@ const paymentSuccessful = async (req, res) => {
   }
 
   const emby = new Emby(process.env.EMBY_URL, process.env.EMBY_API_KEY);
+
   try {
-    await emby.createUser(username, password);
+    const id = await emby.createUser(username, password);
+    console.log(id);
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       successful: false,
       message: "something wrong with the server or maybe id already exist.",
     });
   }
 
-  res.send("hello world");
+  res.redirect(process.env.EMBY_URL);
 };
 module.exports = paymentSuccessful;
