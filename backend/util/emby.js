@@ -10,6 +10,7 @@ class Emby {
     //
     //
     // this will create user to the emby server.
+    //
     const createdUser = await fetch(
       `${this.url}/emby/Users/New?api_key=${this.apiKey}`,
       {
@@ -25,7 +26,7 @@ class Emby {
     );
 
     if (!createdUser.ok) {
-      throw "user not created. something wrong with the emby server or user already exist.";
+      throw createdUser;
     }
 
     const responseData = await createdUser.json();
@@ -57,3 +58,5 @@ class Emby {
     return { username, password, userId };
   }
 }
+
+module.exports = Emby;
