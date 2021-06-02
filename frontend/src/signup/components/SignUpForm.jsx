@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 // castom imports
 import Button from "../../shared/UI/Button";
 import Input from "./Input";
-const AuthForm = (props) => {
+
+const SignUpForm = (props) => {
   const {
     register,
     handleSubmit,
@@ -87,10 +88,10 @@ const AuthForm = (props) => {
       />
 
       <fieldset>
-        <Button>Register</Button>
+        <Button className="signup__btn">Register</Button>
       </fieldset>
     </form>
   );
 };
 
-export default AuthForm;
+export default SignUpForm;

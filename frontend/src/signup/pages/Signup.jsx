@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // signup page
-import AuthForm from "../components/AuthForm";
+import SignUpForm from "../components/SignUpForm";
 import "./Signup.css";
 const Signup = () => {
   // changing title of the page.
@@ -74,7 +74,7 @@ const Signup = () => {
 
   return (
     <div className="container">
-      <AuthForm
+      <SignUpForm
         onSubmitHandler={onSubmitHandler}
         userExistHandler={userExistHandler}
         uniqueUsername={uniqueUsername}
