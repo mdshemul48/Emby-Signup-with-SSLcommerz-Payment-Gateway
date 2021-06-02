@@ -12,7 +12,7 @@ const Signup = () => {
   const onSubmitHandler = (data) => {
     const { username, email, password, name, number } = data;
 
-    const createPaymentSession = async () => {
+    const signup = async () => {
       const response = await fetch(
         process.env.REACT_APP_BACKEND_URL + "/api/payment",
         {
@@ -39,7 +39,7 @@ const Signup = () => {
         return alert("something wrong with the server please try again.");
       }
     };
-    createPaymentSession();
+    signup();
   };
 
   // this will check if user already exist in the server or not.
