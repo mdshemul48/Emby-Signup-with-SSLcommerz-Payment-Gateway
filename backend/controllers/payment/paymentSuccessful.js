@@ -49,7 +49,7 @@ const paymentSuccessful = async (req, res) => {
     });
   }
 
-  res.redirect(process.env.EMBY_URL);
+  res.redirect(process.env.SUCCESSFUL_PAGE);
 };
 
 module.exports = paymentSuccessful;

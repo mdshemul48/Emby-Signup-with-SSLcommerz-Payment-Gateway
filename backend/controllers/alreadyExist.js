@@ -3,7 +3,7 @@ const User = require("../models/user");
 const alreadyExist = async (req, res) => {
   // getting username from the request
   const { username } = req.body;
-
+  console.log(username);
   // checking if user already exist in the db or not.
   let userExist;
   try {

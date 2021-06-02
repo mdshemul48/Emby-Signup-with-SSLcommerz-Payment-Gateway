@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
 const alreadyExist = require("../controllers/alreadyExist");
-router.get("/username", alreadyExist);
+router.post("/username", alreadyExist);
 
 module.exports = router;
