@@ -38,8 +38,6 @@ const Signup = () => {
       if (!responseText.successful) {
         return alert("something wrong with the server please try again.");
       }
-
-      return window.open(responseText.link, "_self");
     };
     createPaymentSession();
   };

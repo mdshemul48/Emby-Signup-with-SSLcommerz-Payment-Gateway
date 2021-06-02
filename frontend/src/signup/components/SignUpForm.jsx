@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 // castom imports
 import Button from "../../shared/UI/Button";
 import Input from "./Input";
-
+import style from "./SignUpForm.module.css";
 const SignUpForm = (props) => {
   const {
     register,
@@ -88,7 +88,7 @@ const SignUpForm = (props) => {
       />
 
       <fieldset>
-        <Button className="signup__btn">Register</Button>
+        <Button className={style.signup__btn}>Register</Button>
       </fieldset>
     </form>
   );
