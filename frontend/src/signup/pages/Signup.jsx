@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 // signup page
+import AuthForm from "../components/AuthForm";
 import "./Signup.css";
 const Signup = () => {
   // changing title of the page.
   document.title = "Signup page";
 
   const [uniqueUsername, setUniqueUsername] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
 
   // this will handle after click submit the form.
   const onSubmitHandler = (data) => {
@@ -74,87 +67,18 @@ const Signup = () => {
     if (!responseText.successful) {
       return alert("something wrong wth the username check function");
     }
-    setUniqueUsername(responseText.found);
+    return responseText.found;
   };
 
   // getting username and calling userExistHandler
-  const checkUsernameHandler = () => {
-    const username = watch("username");
-    userExistHandler(username);
-  };
 
   return (
     <div className="container">
-      <form
-        className="form"
-        id="contact"
-        onSubmit={handleSubmit(onSubmitHandler)}
-      >
-        <h3>Emby Signup page</h3>
-        <h4>Contact us for any quote</h4>
-        {uniqueUsername && (
-          <h4 className="error">
-            Username already exist. Please choose another one.
-          </h4>
-        )}
-        {errors.password?.message && (
-          <h4 className="error">{errors.password?.message}</h4>
-        )}
-        <fieldset>
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="form__input"
-            {...register("name", { required: true })}
-          />
-        </fieldset>
-
-        <fieldset>
-          <input
-            {...register("number", { required: true })}
-            type="tel"
-            placeholder="Phone Number"
-            className="form__input"
-          />
-        </fieldset>
-        <fieldset>
-          <input
-            type="email"
-            {...register("email", { required: true })}
-            placeholder="Email"
-            className="form__input"
-          />
-        </fieldset>
-        <fieldset>
-          <input
-            type="text"
-            {...register("username", { required: true })}
-            placeholder="Username"
-            className="form__input"
-            onBlur={checkUsernameHandler}
-          />
-        </fieldset>
-        <fieldset>
-          <input
-            type="password"
-            {...register("password", {
-              required: true,
-              minLength: {
-                value: 8,
-                message: "Please Enter Password within 8 Characters",
-              },
-            })}
-            placeholder="Password"
-            className="form__input"
-          />
-        </fieldset>
-
-        <fieldset>
-          <button className="btn" type="submit">
-            Pay and Register
-          </button>
-        </fieldset>
-      </form>
+      <AuthForm
+        onSubmitHandler={onSubmitHandler}
+        userExistHandler={userExistHandler}
+        uniqueUsername={uniqueUsername}
+      />
     </div>
   );
 };
