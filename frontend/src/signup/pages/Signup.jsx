@@ -91,24 +91,27 @@ const Signup = () => {
         onSubmit={handleSubmit(onSubmitHandler)}
       >
         <h3>Emby Signup page</h3>
-        <h4>Contact us for custom quote</h4>
+        <h4>Contact us for any quote</h4>
         {uniqueUsername && (
           <h4 className="error">
             Username already exist. Please choose another one.
           </h4>
+        )}
+        {errors.password?.message && (
+          <h4 className="error">{errors.password?.message}</h4>
         )}
         <fieldset>
           <input
             type="text"
             placeholder="Full Name"
             className="form__input"
-            {...register("name")}
+            {...register("name", { required: true })}
           />
         </fieldset>
 
         <fieldset>
           <input
-            {...register("number")}
+            {...register("number", { required: true })}
             type="tel"
             placeholder="Phone Number"
             className="form__input"
@@ -117,7 +120,7 @@ const Signup = () => {
         <fieldset>
           <input
             type="email"
-            {...register("email")}
+            {...register("email", { required: true })}
             placeholder="Email"
             className="form__input"
           />
@@ -125,7 +128,7 @@ const Signup = () => {
         <fieldset>
           <input
             type="text"
-            {...register("username")}
+            {...register("username", { required: true })}
             placeholder="Username"
             className="form__input"
             onBlur={checkUsernameHandler}
@@ -134,7 +137,13 @@ const Signup = () => {
         <fieldset>
           <input
             type="password"
-            {...register("password", { min: 8 })}
+            {...register("password", {
+              required: true,
+              minLength: {
+                value: 8,
+                message: "Please Enter Password within 8 Characters",
+              },
+            })}
             placeholder="Password"
             className="form__input"
           />
